@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amaljith P V — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4F6F5;
+    --panel: #FFFFFF;
+    --ink: #14211E;
+    --ink-soft: #4C5D59;
+    --line: #DCE3E0;
+    --teal: #2B6E63;
+    --teal-deep: #17433C;
+    --amber: #D98A3D;
+    --amber-soft: #FBEADA;
+    --teal-soft: #E4EFEC;
+    --radius: 14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,246,245,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; letter-spacing:0.02em;}
+  .logo span{color:var(--teal);}
+  .navlinks{display:flex; gap:28px; font-size:14px; font-weight:500; color:var(--ink-soft);}
+  .navlinks a{text-decoration:none; transition:color .2s;}
+  .navlinks a:hover{color:var(--teal-deep);}
+  .navlinks a:focus-visible, a:focus-visible{outline:2px solid var(--teal); outline-offset:3px; border-radius:3px;}
+  @media (max-width:640px){ .navlinks{display:none;} }
+
+  /* HERO */
+  .hero{padding:64px 0 40px;}
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal-deep);
+    background:var(--teal-soft); border:1px solid var(--line);
+    padding:6px 12px; border-radius:100px; margin-bottom:22px;
+  }
+  .status-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--amber); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .hero h1{font-size:clamp(34px,5.6vw,54px); font-weight:700; line-height:1.05; max-width:760px;}
+  .hero .role{color:var(--teal-deep); font-size:clamp(34px,5.6vw,54px);}
+  .hero p.lede{margin-top:20px; max-width:600px; font-size:17px; color:var(--ink-soft);}
+  .hero .cta-row{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:9px; font-weight:600; font-size:14px;
+    text-decoration:none; border:1px solid transparent; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--teal-deep); color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(23,67,60,0.25);}
+  .btn-ghost{border-color:var(--line); background:var(--panel); color:var(--ink);}
+  .btn-ghost:hover{transform:translateY(-2px); border-color:var(--teal);}
+
+  /* DASHBOARD STAT ROW */
+  .stat-grid{
+    margin-top:52px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  @media (max-width:760px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  .stat-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 18px; position:relative; overflow:hidden;
+  }
+  .stat-card .label{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
+  .stat-card .value{font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; margin-top:6px; color:var(--teal-deep);}
+  .stat-card .bar{height:4px; border-radius:4px; background:var(--teal-soft); margin-top:14px; overflow:hidden;}
+  .stat-card .bar i{display:block; height:100%; background:var(--amber); border-radius:4px; transform-origin:left; animation:grow 1.4s ease forwards;}
+  @keyframes grow{from{transform:scaleX(0);} to{transform:scaleX(1);}}
+
+  section{padding:64px 0;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:28px;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal); border:1px solid var(--line); padding:3px 9px; border-radius:100px; background:var(--panel);}
+  .section-head h2{font-size:26px; font-weight:700;}
+  .divider{height:1px; background:var(--line); border:none;}
+
+  /* OBJECTIVE */
+  .objective p{font-size:17px; color:var(--ink-soft); max-width:760px;}
+
+  /* EXPERIENCE */
+  .exp-item{
+    display:grid; grid-template-columns:180px 1fr; gap:24px; padding:22px 0; border-top:1px solid var(--line);
+  }
+  .exp-item:last-child{border-bottom:1px solid var(--line);}
+  @media (max-width:640px){ .exp-item{grid-template-columns:1fr;} }
+  .exp-item .period{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
+  .exp-item h3{font-size:17px; font-weight:600;}
+  .exp-item .org{color:var(--teal-deep); font-weight:500; font-size:14.5px; margin-top:2px;}
+  .exp-item ul{margin-top:10px; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .exp-item li{margin-bottom:4px;}
+
+  /* PROJECTS */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:26px;
+    display:flex; flex-direction:column; transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .proj-card:hover{box-shadow:0 10px 24px rgba(20,33,30,0.08); transform:translateY(-3px);}
+  .proj-card .kicker{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--amber); text-transform:uppercase; letter-spacing:.05em;}
+  .proj-card h3{font-size:19px; margin-top:8px; font-weight:700;}
+  .proj-card p{color:var(--ink-soft); font-size:14.5px; margin-top:10px; flex-grow:1;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:16px;}
+  .chip{font-family:'IBM Plex Mono',monospace; font-size:11.5px; background:var(--teal-soft); color:var(--teal-deep); padding:4px 9px; border-radius:6px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px 40px;}
+  @media (max-width:640px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-group .label{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;}
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-tag{
+    font-size:13.5px; font-weight:500; padding:6px 12px; border-radius:8px;
+    background:var(--panel); border:1px solid var(--line);
+  }
+
+  /* CERTS + EDUCATION */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .two-col{grid-template-columns:1fr;} }
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:24px;}
+  .card h3{font-size:15px; font-family:'IBM Plex Mono',monospace; color:var(--teal-deep); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;}
+  .cert-list li, .edu-block{list-style:none; margin-bottom:12px; font-size:14.5px;}
+  .edu-block .degree{font-weight:600;}
+  .edu-block .school{color:var(--ink-soft); font-size:13.5px;}
+
+  /* FOOTER / CONTACT */
+  footer{padding:60px 0 80px; text-align:center;}
+  footer h2{font-size:28px; font-weight:700;}
+  footer p{color:var(--ink-soft); margin-top:10px;}
+  .contact-row{display:flex; justify-content:center; gap:14px; margin-top:26px; flex-wrap:wrap;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">AMALJITH<span>.PV</span></div>
+    <div class="navlinks">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="status-pill"><span class="dot"></span>OPEN TO WORK — DATA ANALYTICS / BI / PYTHON</div>
+    <h1>Amaljith P V<br><span class="role">Data Analyst</span></h1>
+    <p class="lede">Aspiring data analyst with strong skills in Python, SQL, and visualization tools like Power BI and Tableau. I turn raw data into dashboards and predictive models that support real decisions.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:amaljithpv789@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+      <a class="btn btn-ghost" href="https://github.com/amaljith4190" target="_blank" rel="noopener">View GitHub</a>
+      <a class="btn btn-ghost" href="https://linkedin.com/in/amaljithamal" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Core Stack</div>
+        <div class="value">Python / SQL</div>
+        <div class="bar"><i style="width:92%"></i></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Dashboards</div>
+        <div class="value">Power BI · Tableau</div>
+        <div class="bar"><i style="width:85%"></i></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Projects Shipped</div>
+        <div class="value">02</div>
+        <div class="bar"><i style="width:70%"></i></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Certifications</div>
+        <div class="value">04</div>
+        <div class="bar"><i style="width:80%"></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="objective">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">01</span><h2>Objective</h2></div>
+    <hr class="divider" style="margin-bottom:24px;">
+    <p>Aspiring data analyst with strong skills in Python, SQL, and data visualization tools like Power BI and Tableau. Passionate about AI, automation, and machine learning for data wrangling, ETL, and predictive modelling to deliver actionable insights and support business decisions.</p>
+
+    <div class="skills-grid" style="margin-top:34px;">
+      <div class="skill-group">
+        <div class="label">Proven on real workflows</div>
+        <p style="font-size:14.5px; color:var(--ink-soft);">Improved data workflow efficiency by 20% during a live internship, not just coursework.</p>
+      </div>
+      <div class="skill-group">
+        <div class="label">End-to-end, not just analysis</div>
+        <p style="font-size:14.5px; color:var(--ink-soft);">Comfortable owning a project from raw data to a decision-ready dashboard: cleaning, modelling, and visualization.</p>
+      </div>
+      <div class="skill-group">
+        <div class="label">Tool-agnostic</div>
+        <p style="font-size:14.5px; color:var(--ink-soft);">Equally at home in Python/SQL for modelling and Power BI/Tableau for stakeholder-facing dashboards.</p>
+      </div>
+      <div class="skill-group">
+        <div class="label">Ready to relocate</div>
+        <p style="font-size:14.5px; color:var(--ink-soft);">Based in Kerala, open to Kochi, Coimbatore, Chennai, Bangalore, and Delhi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">02</span><h2>Experience</h2></div>
+    <hr class="divider">
+
+    <div class="exp-item">
+      <div class="period">Apr 2023 — May 2023</div>
+      <div>
+        <h3>Python Programming Intern</h3>
+        <div class="org">Blue Kode</div>
+        <ul>
+          <li>Optimized Python scripts for automated data wrangling, preprocessing, and ETL with Pandas.</li>
+          <li>Worked with a team to streamline data workflows, improving efficiency by 20%.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="period">May 2023</div>
+      <div>
+        <h3>Full Stack Development Intern</h3>
+        <div class="org">NXT Logic</div>
+        <ul>
+          <li>Built web applications using Java for front-end and back-end integration.</li>
+          <li>Gained hands-on experience in database handling and RESTful services.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">03</span><h2>Projects</h2></div>
+    <hr class="divider" style="margin-bottom:28px;">
+
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="kicker">End-to-end analytics system</div>
+        <h3>Big Data for Crime Analysis</h3>
+        <p><strong>Problem:</strong> Law enforcement data was scattered and reactive, with no way to anticipate where incidents were likely to occur.<br><br>
+        <strong>Approach:</strong> Cleaned and structured raw crime records in MySQL, then built a Scikit-learn model to detect hotspot patterns and forecast risk.<br><br>
+        <strong>Impact:</strong> Delivered an interactive Power BI dashboard turning historical data into a forward-looking hotspot forecast for decision-makers.</p>
+        <div class="stack-row">
+          <span class="chip">Python</span><span class="chip">MySQL</span><span class="chip">Scikit-learn</span><span class="chip">Power BI</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="kicker">Predictive modelling</div>
+        <h3>Climate Change &amp; Agriculture Analytics</h3>
+        <p><strong>Problem:</strong> Farmers and analysts lacked a clear, data-backed view of how shifting climate trends would affect future crop yields.<br><br>
+        <strong>Approach:</strong> Built regression models in Python on historical climate and yield data, then automated the forecasting pipeline.<br><br>
+        <strong>Impact:</strong> Produced Tableau visualizations translating climate trends into actionable agricultural impact estimates.</p>
+        <div class="stack-row">
+          <span class="chip">Python</span><span class="chip">Seaborn</span><span class="chip">Tableau</span><span class="chip">Regression</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">04</span><h2>Skills</h2></div>
+    <hr class="divider" style="margin-bottom:28px;">
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="label">Programming Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="label">Data Processing &amp; Analysis</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="label">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ETL</span><span class="skill-tag">Data Cleaning</span><span class="skill-tag">Data Wrangling</span><span class="skill-tag">Automation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="label">AI &amp; Machine Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Scikit-learn</span><span class="skill-tag">Regression</span><span class="skill-tag">Classification</span><span class="skill-tag">Predictive Modelling</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="label">Visualization Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="label">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Team Player</span><span class="skill-tag">Communication</span><span class="skill-tag">Problem-solving</span><span class="skill-tag">Critical Thinking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head"><span class="tag">05</span><h2>Certifications &amp; Education</h2></div>
+    <hr class="divider" style="margin-bottom:28px;">
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Certifications</h3>
+        <ul class="cert-list">
+          <li>Oracle Certified Foundations Associate — Oracle</li>
+          <li>Power BI for Beginners — Microsoft (Dashboards, DAX, Data Modelling, Automation)</li>
+          <li>Diploma in Cyber Security</li>
+          <li>Training Certification — Infosys</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Education</h3>
+        <div class="edu-block">
+          <div class="degree">BSc Computer Science with Data Analytics</div>
+          <div class="school">AJK College of Arts &amp; Science, Coimbatore (Bharathiar University) · 2022–2025</div>
+        </div>
+        <div class="edu-block">
+          <div class="degree">Higher Secondary School (Biology Science)</div>
+          <div class="school">Parali Higher Secondary School, Palakkad, Kerala · 2020–2022</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's work together</h2>
+    <p>Palakkad, Kerala — open to relocating across India</p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:amaljithpv789@gmail.com">amaljithpv789@gmail.com</a>
+      <a class="btn btn-ghost" href="tel:9744084190">9744084190</a>
+    </div>
+    <div class="contact-row">
+      <a class="btn btn-ghost" href="https://linkedin.com/in/amaljithamal" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/amaljith4190" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
